@@ -87,14 +87,37 @@ function setValueFromDropdown(fieldName, data, containerSelector) {
 }
 
 
-// keep seleected
-setValueFromDropdown('company_id', data, '#company-edit');
-            setValueFromDropdown('presea_department_id', data, '#presea_edit');
-            setValueFromDropdown('cm_department_id', data, '#cm_edit');
-            setValueFromDropdown('department_24_7_id', data, '#department_24_7_edit');
-            setValueFromDropdown('pni_department_id', data, '#pni_dept_edit');
-            setValueFromDropdown('kits_department_id', data, '#kits_edit');
-            setValueFromDropdown('dm_department_id', data, '#dm_dept_edit');
-            setValueFromDropdown('previous_dna_test_port_l', data, '#previous_dna_l_edit');
-            setValueFromDropdown('last_dna_test_port_r', data, '#last_dna_r_edit');
+// keep selected
+setValueFromDropdown('company_id', data, '#company-edit');           
+//You can check this function also
+ function setValueFromDropdown(fieldName, data) {
+     $(`[name=${fieldName}]`).val(data[fieldName]);
+     var selectedItem = $(`.dropdown-list .dropdown-item`).filter(function() {
+         return $(this).attr('value').startsWith(data[fieldName]); 
+     }).first();
 
+     if (selectedItem.length) {
+         $(`[name=${fieldName}]`).val(selectedItem.attr('value'));
+        
+     }
+ }
+ console.log(`Dropdown Item Value for ${fieldName}: ${selectedItem.attr('value')}`);
+// Usage
+// the way to set value in dropdown
+// setValueFromDropdown('vessel_type', data);
+
+
+
+// <!-- dropdown modal value to print if there is selected in it -->  
+
+  $(document).ready(function() {
+       function SelectedAttribute(fieldName) {
+           var selectedDropDownItem = $(".dropdown-item[selected]");
+          if(selectedDropDownItem.length) {
+               const selectedValue = selectedDropDownItem.attr('value');
+               $(".dropdown-input").val(selectedValue);
+           }
+       }
+       SelectedAttribute("add_toe_test_profiles[]");
+   });
+ 
