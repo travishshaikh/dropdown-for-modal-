@@ -1,0 +1,11 @@
+<div class="dropdown-container form-control">
+                                            <button class="drop_down_arrow">▼</button>
+                                            <input type="text" class="dropdown-input " name="company_id" value="" placeholder="Select an option" required>
+                                            <div class="dropdown-list" id="company-edit">
+                                                @foreach ($companies as $key => $com)
+                                                <div class="dropdown-item" value="{{ $com['id'].'- ' .$com['company_name'].'-'.$com['company_code'] }}">
+                                                    {{ $com['id'] . ' - ' . $com['company_name'] . ' - ' . $com['company_code'] }}
+                                                </div>
+                                                @endforeach
+                                            </div>
+                                        </div> 
